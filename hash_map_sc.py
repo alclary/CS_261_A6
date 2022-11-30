@@ -118,10 +118,13 @@ class HashMap:
         pass
 
     def table_load(self) -> float:
+        """Returns the current hash table load factor.
+
+        Returns:
+            float: current load factor of the hash map
         """
-        TODO: Write this implementation
-        """
-        pass
+        load_factor = self._size / self._capacity
+        return load_factor
 
     def clear(self) -> None:
         """
