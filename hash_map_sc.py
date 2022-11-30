@@ -106,10 +106,26 @@ class HashMap:
     # ------------------------------------------------------------------ #
 
     def put(self, key: str, value: object) -> None:
+        """Updates or inserts the given key/value pair in the hash map. If the
+            given key already exists, the previous value is overwritten.
+
+        Args:
+            key (str): key of key/value pair to be added to hash map
+            value (object): value of key/value pair to be added to hash map
         """
-        TODO: Write this implementation
-        """
-        pass
+        if self.table_load() >= 1.0:
+            self._double_capacity()
+
+        key_hash = self._hash_function(key) % self._capacity
+        list_at_hash = self._buckets[key_hash]
+
+        # ensure key is replaced if already exists
+        if list_at_hash.remove(key) == True:
+            self._size -= 1
+        list_at_hash.insert(key, value)
+        self._size += 1
+
+        return
 
     def empty_buckets(self) -> int:
         """
