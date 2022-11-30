@@ -1,9 +1,10 @@
-# Name:
-# OSU Email:
+# Name: Anthony Logan Clary
+# OSU Email: claryan@oregonstate.edu
 # Course: CS261 - Data Structures
-# Assignment:
-# Due Date:
-# Description:
+# Assignment: Assignment 6
+# Due Date: 12/2/2022
+# Description: Assignment 6: HashMap Implementation
+
 
 from a6_include import (DynamicArray, DynamicArrayException, HashEntry,
                         hash_function_1, hash_function_2)
