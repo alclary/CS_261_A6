@@ -194,7 +194,20 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        pass
+        key_hash = self._hash_function(key)
+        index = key_hash % self._capacity
+
+        if self.contains_key(key):
+            bucket = self._buckets[index]
+        else:
+            return None
+
+        for node in bucket:
+            if node.key == key:
+                return node.value
+
+        return None
+
 
     def contains_key(self, key: str) -> bool:
         """
