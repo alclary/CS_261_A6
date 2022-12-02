@@ -213,7 +213,22 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        pass
+        key_hash = self._hash_function(key)
+        index = key_hash % self._capacity
+
+        if index in range(self._capacity):
+            bucket = self._buckets[index]
+        else:
+            return False
+
+        if bucket.length() == 0:
+            return False
+        else:
+            for node in bucket:
+                if node.key == key:
+                    return True
+
+        return False
 
     def remove(self, key: str) -> None:
         """
