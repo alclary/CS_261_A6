@@ -133,7 +133,13 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        pass
+        empty_buckets = 0
+
+        for i in range(self._capacity):
+            if self._buckets[i].length() == 0:
+                empty_buckets += 1
+
+        return empty_buckets
 
     def table_load(self) -> float:
         """Returns the current hash table load factor.
