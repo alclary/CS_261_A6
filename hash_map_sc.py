@@ -165,7 +165,30 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        pass
+        old_capacity = self._capacity
+
+        # ensure capcity >=1 and is a prime number
+        if new_capacity < 1:
+            return
+        elif not self._is_prime(new_capacity):
+            new_capacity = self._next_prime(new_capacity)
+
+        # create new HashMap with new_capacity
+        old_hashmap = self._buckets
+        self._capacity = new_capacity
+        self.clear()
+
+
+        # rehash all key/value pairs in original hashmap
+        for i in range(old_capacity):
+            bucket = old_hashmap[i]
+            if bucket.length() == 0:
+                continue
+            else:
+                for node in bucket:
+                    self.put(node.key, node.value)
+
+        return
 
     def get(self, key: str):
         """
