@@ -113,17 +113,19 @@ class HashMap:
             key (str): key of key/value pair to be added to hash map
             value (object): value of key/value pair to be added to hash map
         """
-        if self.table_load() >= 1.0:
-            self._double_capacity()
-
-        key_hash = self._hash_function(key) % self._capacity
-        list_at_hash = self._buckets[key_hash]
+        key_hash = self._hash_function(key)
+        index = key_hash % self._capacity
+        list_at_hash = self._buckets[index]
 
         # ensure key is replaced if already exists
         if list_at_hash.remove(key) == True:
             self._size -= 1
         list_at_hash.insert(key, value)
         self._size += 1
+
+        # table is resized to double current capacity if load factor >=  1
+        if self.table_load() >= 1.0:
+            self.resize_table(self._capacity * 2)
 
         return
 
