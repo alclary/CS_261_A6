@@ -154,7 +154,12 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        pass
+        self._buckets = DynamicArray()
+        self._size = 0
+        for _ in range(self._capacity):
+            self._buckets.append(LinkedList())
+
+        return
 
     def resize_table(self, new_capacity: int) -> None:
         """
