@@ -246,8 +246,13 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        pass
+        keys_and_values = DynamicArray()
 
+        for i in range(self._buckets.length()):
+            for node in self._buckets[i]:
+                keys_and_values.append((node.key, node.value))
+
+        return keys_and_values
 
 def find_mode(da: DynamicArray) -> (DynamicArray, int):
     """
