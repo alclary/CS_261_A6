@@ -234,7 +234,13 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        pass
+        key_hash = self._hash_function(key)
+        index = key_hash % self._capacity
+
+        if self.contains_key(key):
+            self._buckets[index].remove(key)
+        else:
+            return None
 
     def get_keys_and_values(self) -> DynamicArray:
         """
