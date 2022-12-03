@@ -220,6 +220,7 @@ class HashMap:
 
         if self.contains_key(key):
             self._buckets[index].remove(key)
+            self._size -= 1
         else:
             return None
 
