@@ -261,7 +261,34 @@ def find_mode(da: DynamicArray) -> (DynamicArray, int):
     # if you'd like to use a hash map,
     # use this instance of your Separate Chaining HashMap
     map = HashMap()
+    mode = 0
+    mode_list = DynamicArray()
 
+
+    # create a frequency hashmap
+    for i in range(da.length()):
+        key = da[i]
+
+        # if key already exists increase count, else single count
+        mapped_value = map.get(key)
+
+        if mapped_value:
+            value = mapped_value + 1
+        else:
+            value = 1
+
+        # insert or replace key in hashmap
+        map.put(da[i], value)
+
+        # see if key count meets of breaks previous best mode
+        if value == mode:
+            mode_list.append(key)
+        elif value > mode:
+            mode = value
+            mode_list = DynamicArray()
+            mode_list.append(key)
+
+    return (mode_list, mode)
 
 # ------------------- BASIC TESTING ---------------------------------------- #
 
