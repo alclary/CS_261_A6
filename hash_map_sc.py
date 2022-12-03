@@ -149,8 +149,18 @@ class HashMap:
         """
         TODO: Write this implementation
         """
+        # Handle invalid new capacity
         if new_capacity < 1:
             return
+        # Fix to handle edge case of given new_capacity that is lower than
+        #   current capacity, thus overloading the map. I think this is largely
+        #   due to poor assignment instructions, as using put() in resize would
+        #   still cause recursion, ableit controlled and likely not infinite in
+        #   the context; see Ed Discussion #372 for more student confusion.
+        elif new_capacity < self._capacity:
+            while self._size / new_capacity >= 1.0:
+                new_capacity = new_capacity * 2
+        # Ensure new_capacity is prime, if not find next prime
         elif self._is_prime(new_capacity) is False:
             new_capacity = self._next_prime(new_capacity)
 
