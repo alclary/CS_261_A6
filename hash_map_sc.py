@@ -71,24 +71,6 @@ class HashMap:
 
         return True
 
-    def _double_capacity(self) -> None:
-        old_capacity = self._capacity
-        new_capacity = old_capacity * 2
-
-        # if new (doubled) capacity is not prime, find next prime
-        if not self._is_prime(new_capacity):
-            new_capacity = self._next_prime(new_capacity)
-
-        # expand HashMap to new capacity and calculate size of growth
-        self._capacity = new_capacity
-        capacity_growth = new_capacity - old_capacity
-
-        # ensure HashMap contains new_capacity # of LinkedLists (buckets)
-        for _ in range(capacity_growth):
-            self._buckets.append(LinkedList())
-
-        return
-
     def get_size(self) -> int:
         """
         Return size of map
