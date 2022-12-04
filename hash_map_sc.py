@@ -101,16 +101,17 @@ class HashMap:
 
         key_hash = self._hash_function(key)
         index = key_hash % self._capacity
-        bucket = self._buckets[index]
 
-        if bucket.length() != 0:
-            for node in bucket:
+        if self._buckets[index].length() == 0:
+            self._buckets[index].insert(key, value)
+            self._size += 1
+        else:
+            for node in self._buckets[index]:
                 if node.key == key:
                     node.value = value
                     return
-
-        bucket.insert(key, value)
-        self._size += 1
+            self._buckets[index].insert(key, value)
+            self._size += 1
         return
 
     def empty_buckets(self) -> int:
