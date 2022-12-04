@@ -150,36 +150,22 @@ class HashMap:
         """
         TODO: Write this implementation
         """
-        # Handle invalid new capacity
         if new_capacity < 1:
             return
-        # Fix to handle edge case of given new_capacity that is lower than
-        #   current capacity, thus overloading the map. I think this is largely
-        #   due to poor assignment instructions, as using put() in resize would
-        #   still cause recursion, ableit controlled and likely not infinite in
-        #   the context; see Ed Discussion #372 for more student confusion.
-        elif new_capacity < self._capacity:
-            while self._size / new_capacity >= 1.0:
-                new_capacity = new_capacity * 2
-        # Ensure new_capacity is prime, if not find next prime
         elif self._is_prime(new_capacity) is False:
             new_capacity = self._next_prime(new_capacity)
 
-        rehashed_map = DynamicArray()
-        for i in range(new_capacity):
-            rehashed_map.append(LinkedList())
-
-        for i in range(self._capacity):
-            bucket = self._buckets[i]
-            if bucket.length() != 0:
-                for node in bucket:
-                    new_key_hash = self._hash_function(node.key)
-                    new_index = new_key_hash % new_capacity
-                    rehashed_map[new_index].insert(node.key, node.value)
-
-        self._buckets = rehashed_map
+        old_table = self._buckets
         self._capacity = new_capacity
+        self.clear()
 
+        for i in range(old_table.length()):
+            bucket = old_table[i]
+            if bucket.length() == 0:
+                continue
+            else:
+                for node in bucket:
+                    self.put(node.key, node.value)
         return
 
     def get(self, key: str):
